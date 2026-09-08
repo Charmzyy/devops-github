@@ -15,8 +15,9 @@ jobs:
   job2:
     runs-on: windows-latest
     steps:
-      - run: python -c "print('Some jobs can run in parallel')"
+      - run: print("Some jobs can run in parallel")
         shell: python
+
 
   job3:
     runs-on: windows-latest
