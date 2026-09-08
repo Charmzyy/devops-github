@@ -1,0 +1,27 @@
+name: Test Environment Variables
+run-name: Test Environments
+
+on: 
+  workflow_dispatch
+
+env:
+  Workflow_Var: I_AM_WORKFLOW_SCOPED
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    env:
+      JOB_VAR: I_AM_JOB_VAR
+    steps:
+      - run: echo "This is $JOB_VAR"
+
+  job2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Step with its own env
+        env:
+          Step_Var: I_AM_STEP_VAR
+        run: |
+          echo "Workflow var: $Workflow_Var"
+          echo "Job var: $JOB_VAR"
+          echo "Step var: $Step_Var"
