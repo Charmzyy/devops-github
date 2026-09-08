@@ -1,0 +1,27 @@
+name: Job Filters
+run-name: Filters
+
+on: 
+  push:
+    branches: [main]
+
+  pull_request: 
+    paths:
+      - "01-history-and-motivation/*.md"
+      - "!01-history-and-motivation/*.txt"
+
+  schedule:
+    - cron: "0 0 * * *"
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Show branch and files
+        run: |
+          echo "Triggered on branch: ${{ github.ref }}"
+          echo "Listing markdown files in 01-history-an-motivation/"
+          ls 01-history-an-motivation/*.md || echo "No markdown files found"
